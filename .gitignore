@@ -1,0 +1,12 @@
+# Node
+node_modules/
+dist/
+
+# Vite
+.vite/
+
+# Env
+.env
+
+# Docker volumes
+pgdata/
