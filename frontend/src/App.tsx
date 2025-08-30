@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 
 const theme = createTheme({
   palette: {
-    mode: "light", // 👈 force light mode
+    mode: "light",
   },
 });
 
