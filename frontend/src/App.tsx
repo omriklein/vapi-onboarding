@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import SignUpPage from './pages/SignUp.page';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { OnboardingStepper } from './pages/Onboarding.page';
 
 const theme = createTheme({
   palette: {
@@ -14,8 +14,8 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/signup2' element={<SignUpPage />} />
+          <Route path='/' element={<OnboardingStepper />} />
+          <Route path='/onboarding' element={<OnboardingStepper />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

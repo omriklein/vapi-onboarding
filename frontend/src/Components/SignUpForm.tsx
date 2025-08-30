@@ -1,7 +1,8 @@
-import { Box, Button, Paper, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { validateForm } from "../utils/formValidation";
+import { Box, Stack, TextField, Typography } from "@mui/material";
+import { validateSignupForm } from "../utils/formValidation";
 
+// TODO: move to another page
 export type UserDetails = {
     name: string,
     service: string,
@@ -9,32 +10,25 @@ export type UserDetails = {
     email: string
 };
 
-const SignUpPage = () => {
-    const [form, setForm] = useState<UserDetails>({
-        name: "",
-        service: "",
-        phone: "",
-        email: "",
-    });
+interface SignUpFormProps {
+    value: UserDetails;
+    onChange: (value: UserDetails) => void;
+}
+
+const SignUpForm = ({ value: form, onChange: setForm }: SignUpFormProps) => {
     const [formErrors, setFromErrors] = useState<Record<string, string>>({});
-    const HasErrors = Object.keys(formErrors).length !== 0;
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newFormData = { ...form, [event.target.name]: event.target.value };
         setForm(newFormData);
-        setFromErrors(validateForm(newFormData));
-    };
-
-    const submitForm = () => {
-        // save data
-        // navigate to next page
-        alert(`Sign up completed! for now...`);
+        const newFormErrors = validateSignupForm(newFormData)
+        setFromErrors(newFormErrors);
     };
 
     return (
        <Box sx={{ p: "2em" }}>
             <Typography variant="h1" gutterBottom>Sign Up</Typography>
-            <Typography variant="subtitle1" gutterBottom>secondary text here?</Typography>
+            <Typography variant="subtitle1" gutterBottom>Please enter your personal information</Typography>
             <Stack spacing={3}>
                 <TextField
                     fullWidth
@@ -73,11 +67,8 @@ const SignUpPage = () => {
                     helperText={formErrors.email}
                 />
             </Stack>
-            <Button variant="contained" fullWidth onClick={submitForm} disabled={HasErrors} sx={{ mt: 3 }}>
-                Sign Up
-            </Button>
         </Box>
     );
 };
 
-export default SignUpPage;
+export default SignUpForm;
