@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import agentRoutes from './routes/agent';
 import userRoutes from './routes/user';
 import callRoutes from './routes/calls';
+import reportRoutes from './routes/report';
 
 dotenv.config();
 
@@ -19,5 +20,6 @@ app.get('/', (req, res) => {
 app.use("/users", userRoutes);
 app.use("/agents", agentRoutes);
 app.use("/calls", callRoutes);
+app.use("/reports", reportRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

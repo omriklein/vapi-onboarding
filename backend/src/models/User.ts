@@ -7,6 +7,8 @@ interface UserAttributes {
   email: string;
   phone: string;
   service: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
