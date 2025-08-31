@@ -24,9 +24,24 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=postgres
       - DB_NAME=vapi
-      - SUMMARY_EMAIL=adi@choopil.com
     depends_on:
-      - migrate 
+      - db 
+
+  email-scheduler:
+    build: ./email-scheduler
+    volumes:
+      - ./email-scheduler:/app
+      - /app/node_modules
+    env_file:
+      - ./.env
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=vapi
+    depends_on:
+      - db 
 
   migrate:
     image: node:20

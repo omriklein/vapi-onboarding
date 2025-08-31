@@ -28,3 +28,10 @@ In this section I will explain what is the tech stack that was chosen for this p
 ### Database
 
 - postgress - reletional db and quick and scalebale
+
+### Email scheduler
+
+This part of the project opens a job to send emails every 24 hours.
+
+> Note: The best practice for this is with a serverless function (with AWS for example)
+
