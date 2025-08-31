@@ -34,6 +34,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// This route lets us create a user and an agent is a single step - if one fails, so does the other
 router.post("/create-user-agent", async (req: Request, res: Response) => {
   const { userData, agentData } = req.body;
 
