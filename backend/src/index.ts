@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import User from "./models/User";
+import User from "./models/user";
+
+import agentRoutes from './routes/agent';
+import userRoutes from './routes/user';
 
 dotenv.config();
 
@@ -13,22 +16,7 @@ app.get('/', (req, res) => {
   res.send('VAPI Onboarding Backend Running');
 });
 
-// Create user
-app.post("/users", async (req, res) => {
-  console.log(`request data`, req.body)
-  try {
-    const user = await User.create(req.body);
-    res.json(user);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Get all users
-app.get("/users", async (_, res) => {
-  console.log(`getting all users`)
-  const users = await User.findAll();
-  res.json(users);
-});
+app.use("/users", userRoutes);
+app.use("/agents", agentRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
