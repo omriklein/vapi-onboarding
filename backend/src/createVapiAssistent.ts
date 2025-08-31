@@ -1,6 +1,8 @@
+import "dotenv/config";
 import axios, { AxiosError } from "axios";
 
-/** Reusable Axios instance */
+const token = process.env.VAPI_TOKEN;
+
 const vapiApi = axios.create({
   baseURL: "https://api.vapi.ai",
   timeout: 15000,
@@ -8,8 +10,6 @@ const vapiApi = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-
 
 export async function createAssistant(token: string, body: Record<string, unknown> = {}) {
   try {
@@ -21,7 +21,6 @@ export async function createAssistant(token: string, body: Record<string, unknow
     return res.data;
   } catch (err) {
     const ax = err as AxiosError;
-    // Helpful error logging
     throw new Error(
       `VAPI request failed: ${ax.response?.status} ${ax.response?.statusText} ` +
       `${typeof ax.response?.data === "string" ? ax.response?.data : JSON.stringify(ax.response?.data)}`
@@ -29,17 +28,12 @@ export async function createAssistant(token: string, body: Record<string, unknow
   }
 }
 
-import "dotenv/config";
-
-async function main() {
-  const token = process.env.VAPI_TOKEN;
+const createVapiAgent = async (name: string, firstMessage: string) => {
   if (!token) {
     throw new Error("VAPI_TOKEN missing. Set it in .env or your environment.");
   }
-  
-  // Add "server" to the body (This is where Vapi will send webhooks)
-  const result = await createAssistant(token, {firstMessage: "Hi there, how are you?"});
-  console.log("Success:", result);
+  const result = await createAssistant(token, {name, firstMessage});
+  return result;
+};
 
-  // TODO: Create a new phone with vapi and set the assistant (using assistantId)
-}
+export default createVapiAgent;

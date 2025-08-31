@@ -24,6 +24,8 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=postgres
       - DB_NAME=vapi
+    env_file:
+      - .env
     depends_on:
       - db 
 

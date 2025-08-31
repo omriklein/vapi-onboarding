@@ -2,14 +2,17 @@ import { Router, Request, Response } from "express";
 import Agent from "../models/agent";
 import sequelize from "../sequelize";
 import User from "../models/user";
+import createVapiAgent from "../createVapiAssistent";
 
 const router = Router();
 
 router.post("/", async (req: Request, res: Response) => {
   try {
-    // TODO: create vapi assistand (agent)
-    const { name, greetingMsg, userId, vapiAgentId } = req.body;
-    const agent = await Agent.create({ name, greetingMsg, userId, vapiAgentId });
+    const { name, greetingMsg, userId } = req.body;
+    
+    const vapiAgent = await createVapiAgent(name, greetingMsg);
+    
+    const agent = await Agent.create({ name, greetingMsg, userId, vapiAgentId: vapiAgent.id });
     res.status(201).json(agent);
   } catch (err: any) {
     res.status(400).json({ error: err.message });
