@@ -40,16 +40,13 @@ router.post("/create-user-agent", async (req: Request, res: Response) => {
   const transaction = await sequelize.transaction();
 
   try {
-    // 1. Create user
     const user = await User.create(userData, { transaction });
 
-    // 2. Create agent linked to this user
     const agent = await Agent.create(
       { ...agentData, userId: user.id },
       { transaction }
     );
 
-    // 3. Commit transaction
     await transaction.commit();
 
     res.status(201).json({
