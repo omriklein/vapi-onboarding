@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import User from "./models/user";
 
 import agentRoutes from './routes/agent';
 import userRoutes from './routes/user';
