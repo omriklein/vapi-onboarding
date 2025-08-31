@@ -26,7 +26,24 @@ services:
       - DB_NAME=vapi
       - SUMMARY_EMAIL=adi@choopil.com
     depends_on:
-      - db 
+      - migrate 
+
+  migrate:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - ./db:/db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: vapi
+    depends_on:
+      - db
+    command: >
+      sh -c "npx sequelize-cli --config /db/config.js --migrations-path /db/migrations db:migrate"
 
   db:
     image: postgres:15
