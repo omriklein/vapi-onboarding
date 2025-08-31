@@ -7,8 +7,9 @@ const router = Router();
 
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const { name, greetingMsg, userId } = req.body;
-    const agent = await Agent.create({ name, greetingMsg, userId });
+    // TODO: create vapi assistand (agent)
+    const { name, greetingMsg, userId, vapiAgentId } = req.body;
+    const agent = await Agent.create({ name, greetingMsg, userId, vapiAgentId });
     res.status(201).json(agent);
   } catch (err: any) {
     res.status(400).json({ error: err.message });

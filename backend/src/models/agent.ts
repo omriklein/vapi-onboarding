@@ -5,6 +5,7 @@ import sequelize from "../sequelize";
 // Types for TypeScript
 interface AgentAttributes {
   id: number;
+  vapiAgentId: string;
   name: string;
   greetingMsg: string;
   userId?: number | null;
@@ -16,6 +17,7 @@ interface AgentCreationAttributes extends Optional<AgentAttributes, "id" | "user
 
 class Agent extends Model<AgentAttributes, AgentCreationAttributes> implements AgentAttributes {
   public id!: number;
+  public vapiAgentId!: string;
   public name!: string;
   public greetingMsg!: string;
   public userId!: number | null;
@@ -26,8 +28,9 @@ class Agent extends Model<AgentAttributes, AgentCreationAttributes> implements A
 Agent.init(
   {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    vapiAgentId: { type: DataTypes.STRING, allowNull: false, unique: true },
     name: { type: DataTypes.STRING, allowNull: false },
-    greetingMsg: { type: DataTypes.STRING, allowNull: false, unique: true },
+    greetingMsg: { type: DataTypes.STRING, allowNull: false },
     userId: { type: DataTypes.INTEGER, allowNull: true },
     createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     updatedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },

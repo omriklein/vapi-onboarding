@@ -35,3 +35,10 @@ This part of the project opens a job to send emails every 24 hours.
 
 > Note: The best practice for this is with a serverless function (with AWS for example)
 
+## VAPI setup:
+
+Go to vapi and set up a user
+
+to setup the webhooks:
+under Organization Settings : set server url to the direct path. for example "https://your-server-url/calls/webhook"
+the route '/calls/webhook' in your server will get message and updates from VAPI calls

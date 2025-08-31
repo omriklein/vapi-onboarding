@@ -2,15 +2,17 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('agents', {
+    await queryInterface.createTable('calls', {
       id: { allowNull: false, autoIncrement: true, primaryKey: true, type: Sequelize.INTEGER },
-      vapiAgentId: { allowNull: false, unique: true, type: Sequelize.STRING },
-      name: { type: Sequelize.STRING, allowNull: false },
-      greetingMsg: { type: Sequelize.STRING, allowNull: false },
-      userId: {
+      callId: { type: Sequelize.STRING, allowNull: true, unique: true },
+      startedAt: { type: Sequelize.DATE, allowNull: false },
+      durationMs: { type: Sequelize.INTEGER, allowNull: false },
+      summary: { type: Sequelize.STRING, allowNull: false },
+      transcript: { type: Sequelize.STRING, allowNull: true },
+      agentId: {
         type: Sequelize.INTEGER, allowNull: true,
         reference: {
-          model: 'users',
+          model: 'agents',
           key: 'id'
         }, onUpdate: 'CASCADE', onDelete: 'SET NULL'
       },
@@ -19,6 +21,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('agents');
+    await queryInterface.dropTable('calls');
   }
 };
