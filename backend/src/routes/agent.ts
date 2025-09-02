@@ -47,8 +47,10 @@ router.post("/create-user-agent", async (req: Request, res: Response) => {
   try {
     const user = await User.create(userData, { transaction });
 
+    const vapiAgent = await createVapiAgent(agentData.name, agentData.greetingMsg);
+
     const agent = await Agent.create(
-      { ...agentData, userId: user.id },
+      { ...agentData, userId: user.id, vapiAgentId: vapiAgent.id},
       { transaction }
     );
 

@@ -5,11 +5,13 @@ import agentRoutes from './routes/agent';
 import userRoutes from './routes/user';
 import callRoutes from './routes/calls';
 import reportRoutes from './routes/report';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors()); // Update cors on production
 
 const PORT = process.env.PORT || 3000;
 

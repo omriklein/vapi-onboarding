@@ -5,15 +5,20 @@ import SignUpForm, { type UserDetails } from "../Components/SignUpForm";
 import AgentSetupForm, { type AgentDetails } from "../Components/AgentSetupForm";
 import Summery from "../Components/Summery";
 import { useNavigate } from "react-router-dom";
+import { createAgentUser } from "../services/agent.service";
 
 type Step = { name: string, component: ReactElement, completed: boolean };
 
 export const OnboardingStepper = () => {
     const [activeStep, setActiveStep] = useState(0);
     const navigate = useNavigate();
-    
-    const handleNext = () => {
+
+    const handleNext = async () => {
         if (activeStep === steps.length - 1) { // Finished
+            const res = await createAgentUser({
+                userData: data.signUp,
+                agentData: data.agentSetup
+            });
             navigate("/success"); // navigate to success page
             return;
         }

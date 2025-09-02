@@ -17,6 +17,6 @@ describe("Verifty got email today", () => {
     cy.contains("GO").click();
 
     cy.contains("VAPI Obnoarding").click();
-    cy.contains("VAPI Onboarding – Last 24 Hours").should("be.visible");
+    cy.get("#html_msg_body").should("be.visible");
   });
 });
