@@ -4,6 +4,7 @@ import { validateSignupForm } from "../utils/formValidation";
 
 // TODO: move to another page
 export type UserDetails = {
+    id?: string,
     name: string,
     service: string,
     phone: string,
