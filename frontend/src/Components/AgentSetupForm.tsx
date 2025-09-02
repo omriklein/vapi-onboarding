@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Box, Stack, TextField, Typography } from "@mui/material";
 import { validateAgentForm } from "../utils/formValidation";
+import type { UserDetails } from "./SignUpForm";
 
 // TODO: move to another page
 export type AgentDetails = {
+    id: string,
     name: string,
     greetingMsg: string,
+    vapiAgentId?: string,
+    userId?: number,
+    user?: UserDetails
 };
 
 interface AgentSetupFormProps {

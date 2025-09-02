@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { OnboardingStepper } from './pages/Onboarding.page';
 import SuccessPage from './pages/Success.page';
 import UserTablePage from './pages/UsersTable.page';
+import AgentTablePage from './pages/AgentsTable.page';
 
 const theme = createTheme({
   palette: {
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/onboarding' element={<OnboardingStepper />} />
           <Route path='/success' element={<SuccessPage />} />
           <Route path='/users' element={<UserTablePage />} />
+          <Route path='/agents' element={<AgentTablePage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

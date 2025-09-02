@@ -7,7 +7,6 @@ const UserTablePage = () => {
 
     const [users, setUsers] = useState<UserDetails[]>([]);
     useEffect(() => {
-
         getAllUsers().then((allUsers) => setUsers(allUsers));
 
     }, []);

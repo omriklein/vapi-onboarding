@@ -16,3 +16,13 @@ export const createAgentUser = async (data: CreateAgentData) => {
     throw error;
   }
 };
+
+export const getAllAgents = async () => {
+  try {
+    const response = await api.get('/agents');
+    return response.data as AgentDetails[];
+  } catch (error: any) {
+    console.error("POST request failed:", error.message || error);
+    throw error;
+  }
+};
