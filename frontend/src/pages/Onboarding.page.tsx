@@ -4,13 +4,19 @@ import { validateAgentForm, validateSignupForm } from "../utils/formValidation";
 import SignUpForm, { type UserDetails } from "../Components/SignUpForm";
 import AgentSetupForm, { type AgentDetails } from "../Components/AgentSetupForm";
 import Summery from "../Components/Summery";
+import { useNavigate } from "react-router-dom";
 
 type Step = { name: string, component: ReactElement, completed: boolean };
 
 export const OnboardingStepper = () => {
     const [activeStep, setActiveStep] = useState(0);
-
+    const navigate = useNavigate();
+    
     const handleNext = () => {
+        if (activeStep === steps.length - 1) { // Finished
+            navigate("/success"); // navigate to success page
+            return;
+        }
         setActiveStep((prev) => prev + 1);
     };
     const handleBack = () => setActiveStep((prev) => prev - 1);
